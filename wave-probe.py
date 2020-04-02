@@ -10,6 +10,7 @@ import logging
 #   - WFPEVENTID (the unique alert ID that you're probing for... this is found in wavefront UI by selecting the 
 # alert in question and grabbing the number after "../alerts/#")
 #   - WFPBASEURL (ex: surf.wavefront.com ... do not include "/")
+#   - SCRIPT_RESPONSE_FILE (this is created by CodeStream)
 #
 # This also assumes the script is ran in a CodeStream ssh task, which requires you to run the following commands 
 # _before_ you execute this python script:
