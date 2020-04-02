@@ -19,4 +19,4 @@ export RESPONSE=$SCRIPT_RESPONSE_FILE
 # Output
 The preceeding CodeStream tasks can then check the response file for the SSH task that this script is ran in for FIRING (aka alert was triggered). Otherwise it will say "NORMAL" after 4 minutes (tunable by changing loop count and/or sleep count)
 
-Example "condition": `$(Push to Prod.Wavefront Probe.output.response} == "FIRING"`
+Example of a CodeStream task's "Condition": `$(Push to Prod.Wavefront Probe.output.response} == "FIRING"`
