@@ -39,7 +39,7 @@ head = {
 }
 
 # Check first 5min of deployment if there's an issue
-while counter < 48:
+while counter < 60:
     counter += 1
     #Check Wavefront Alert's status
     r = requests.get(url, headers=head)
@@ -51,12 +51,12 @@ while counter < 48:
         #Pass on to the response file that, which feeds into next
         #CodeStream task that there's an issue
         os.system(cmd)
-        counter = 48
-    elif counter == 47:
+        counter = 60
+    elif counter == 59:
         os.system(normal_cmd)
-        counter = 48
+        counter = 60
     else:
-    #If therer's no issue, sleep for 10 seconds and try again
+    #If therer's no issue, sleep for 5 seconds and try again
         print ("Going to sleep for 5 seconds")
         time.sleep(5)
         print ("Waking up")
