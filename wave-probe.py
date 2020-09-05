@@ -6,13 +6,13 @@ import logging
 
 # DEPENDENCIES:
 # This assumes you have the following environment variables set:
-#   - TO_TOKEN (for your Wavefront API token)
-#   - TO_EVENTID (the unique alert ID that you're probing for... this is found in wavefront UI by selecting the 
+#   - TO_TOKEN (for your Tanzu Observability API token)
+#   - TO_EVENTID (the unique alert ID that you're probing for... this is found in Tanzu Observability UI by selecting the 
 # alert in question and grabbing the number after "../alerts/#")
 #   - TO_BASEURL (ex: surf.wavefront.com ... do not include "/")
 #   - SCRIPT_RESPONSE_FILE (this is created by CodeStream)
 #
-# This also assumes the script is ran in a CodeStream ssh task, which requires you to run the following commands 
+# This also assumes the script is ran in a Code Stream ssh task, which requires you to run the following commands 
 # _before_ you execute this python script:
 #
 # export TO_TOKEN=[API TOKEN]
@@ -20,11 +20,11 @@ import logging
 # export TO_BASEURL=$ [x.wavefront.com]
 # export RESPONSE=$SCRIPT_RESPONSE_FILE
 #
-# The preceeding CodeStream tasks can then check the response file for FIRING (alert was triggered). 
+# The preceeding Code Stream tasks can then check the response file for FIRING (alert was triggered). 
 # Otherwise after it will say "NORMAL" after 4 minutes (tunable by changing loop count and/or sleep count)
 
 #ENV VARs
-TOAuth = "Bearer " + str(os.environ['TO_TOKEN']) #your Wavefront API token
+TOAuth = "Bearer " + str(os.environ['TO_TOKEN']) #your Tanzu Observability API token
 eventID = os.environ['TO_EVENTID'] # unique alert ID that we're probing for
 baseURL = os.environ['TO_BASEURL'] # example: surf.wavefront.com
 
@@ -41,7 +41,7 @@ head = {
 # Check first 5min of deployment if there's an issue
 while counter < 60:
     counter += 1
-    #Check Wavefront Alert's status
+    #Check Tanzu Observability's Alert status
     r = requests.get(url, headers=head)
     rj = r.json()
     status=rj["response"]["status"][0]
@@ -49,7 +49,7 @@ while counter < 60:
     #If the alert is firing, it means there's an issue
     if "FIRING" in status:
         #Pass on to the response file that, which feeds into next
-        #CodeStream task that there's an issue
+        #Code Stream task that there's an issue
         os.system(cmd)
         counter = 60
     elif counter == 59:
