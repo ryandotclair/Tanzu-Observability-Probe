@@ -17,6 +17,6 @@ export RESPONSE=$SCRIPT_RESPONSE_FILE
 ```
 
 # Output
-The preceeding Code Stream tasks can then check the response file for the SSH task that this script is ran in for FIRING (aka alert was triggered). Otherwise it will say "NORMAL" after 4 minutes (tunable by changing loop count and/or sleep count)
+The preceeding Code Stream tasks can then check the response file for the SSH task that this script is ran in for FIRING (aka alert was triggered). Otherwise it will say "NORMAL" after 5 minutes (tunable by changing loop count and/or sleep count)
 
 Example of a Code Stream task's "Condition": `$(Push to Prod.TO Probe.output.response} == "FIRING"`
